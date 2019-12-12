@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-EMarket.Web-2C3D7CFF-68BD-4523-ADC2-9B8065D15920</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\EMarket.ApplicationCore\EMarket.ApplicationCore.csproj" />
+    <ProjectReference Include="..\EMarket.Infrastructure\EMarket.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
