@@ -8,4 +8,8 @@
     <ProjectReference Include="..\EMarket.ApplicationCore\EMarket.ApplicationCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.0" />
+  </ItemGroup>
+
 </Project>
