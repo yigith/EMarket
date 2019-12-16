@@ -56,6 +56,14 @@ namespace EMarket.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    using (var db = scope.ServiceProvider.GetService<ApplicationDbContext>())
+            //    {
+            //        db.Database.Migrate();
+            //    }
+            //}
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
