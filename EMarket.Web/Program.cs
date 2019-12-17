@@ -25,12 +25,12 @@ namespace EMarket.Web
                 var dbContext = scope.ServiceProvider
                     .GetRequiredService<ApplicationDbContext>();
 
-                ApplicationDbContextSeed.Seed(dbContext);
+                ApplicationDbContextSeed.SeedProductsAndCategories(dbContext);
 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                await ApplicationDbContextSeed.SeedUsersAsync(userManager, roleManager);
+                await ApplicationDbContextSeed.SeedUsersAndRolesAsync(userManager, roleManager);
             }
 
             host.Run();
