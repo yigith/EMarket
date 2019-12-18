@@ -20,13 +20,44 @@ namespace EMarket.Web.Services
             _productRepository = productRepository;
         }
 
-        public HomeIndexViewModel GetHomeIndexViewModel()
+        public HomeIndexViewModel GetHomeIndexViewModel(int? categoryId, int pageIndex, int productsPerPage)
         {
+            var products = _productRepository.GetAll();
+
+            if (categoryId != null)
+            {
+                products = products.Where(x => x.CategoryId == categoryId);
+            }
+
+            var totalItems = products.Count();
+
             var vm = new HomeIndexViewModel
             {
-                Categories = _categoryRepository.GetAll().ToList(),
-                Products = _productRepository.GetAll().ToList()
+                Categories = _categoryRepository.GetAll()
+                    .Select(x => new CategoryViewModel 
+                    { 
+                        Id = x.Id,
+                        CategoryName = x.CategoryName,
+                        ProductCount = x.Products.Count
+                    })
+                    .ToList(),
+                Products = products
+                    .Skip((pageIndex - 1) * productsPerPage)
+                    .Take(productsPerPage)
+                    .ToList(),
+                PaginationInfo = new PaginationInfoViewModel
+                {
+                    TotalItems = totalItems,
+                    ActualPage = pageIndex,
+                    TotalPages = (int)Math.Ceiling((decimal)totalItems / productsPerPage)
+                }
             };
+
+            vm.PaginationInfo.ItemsPerPage = vm.Products.Count;
+            vm.PaginationInfo.Next = vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages
+                                        ? "passive" : "active";
+            vm.PaginationInfo.Previous = vm.PaginationInfo.ActualPage == 1 
+                                        ? "passive" : "active";
 
             return vm;
         }
