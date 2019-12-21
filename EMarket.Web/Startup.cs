@@ -18,6 +18,7 @@ using EMarket.ApplicationCore.Interfaces;
 using EMarket.ApplicationCore.Services;
 using EMarket.Web.Interfaces;
 using EMarket.Web.Services;
+using EMarket.Infrastructure.Services;
 
 namespace EMarket.Web
 {
@@ -49,9 +50,12 @@ namespace EMarket.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddHttpContextAccessor();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
+            services.AddScoped<IBasketViewModelService, BasketViewModelService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBasketService, BasketService>();
 
             services.AddDistributedMemoryCache();
 
