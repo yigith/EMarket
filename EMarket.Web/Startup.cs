@@ -50,9 +50,12 @@ namespace EMarket.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddHttpContextAccessor();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
+            services.AddScoped<IBasketViewModelService, BasketViewModelService>();
 
             services.AddDistributedMemoryCache();
 
@@ -64,9 +67,6 @@ namespace EMarket.Web
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
-
-            services.AddHttpContextAccessor();
-            services.AddScoped<IBasketService, BasketService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
